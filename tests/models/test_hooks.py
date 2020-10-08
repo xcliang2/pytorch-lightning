@@ -143,7 +143,7 @@ def test_trainer_model_hook_system(tmpdir):
         def on_after_backward(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_after_backward()
-        
+
         def on_before_zero_grad(self, optimizer):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_before_zero_grad(optimizer)
@@ -155,83 +155,83 @@ def test_trainer_model_hook_system(tmpdir):
         def on_epoch_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_epoch_end()
-        
+
         def on_fit_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_fit_start()
-        
+
         def on_fit_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_fit_end()
-        
+
         def on_hpc_load(self, checkpoint):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_hpc_load(checkpoint)
-        
+
         def on_hpc_save(self, checkpoint):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_hpc_save(checkpoint)
-        
+
         def on_load_checkpoint(self, checkpoint):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_load_checkpoint(checkpoint)
-        
+
         def on_save_checkpoint(self, checkpoint):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_save_checkpoint(checkpoint)
-        
+
         def on_pretrain_routine_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_pretrain_routine_start()
-        
+
         def on_pretrain_routine_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_pretrain_routine_end()
-        
+
         def on_train_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_start()
-        
+
         def on_train_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_end()
-        
+
         def on_train_batch_start(self, batch, batch_idx, dataloader_idx):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_batch_start(batch, batch_idx, dataloader_idx)
-        
+
         def on_train_batch_end(self, outputs, batch, batch_idx, dataloader_idx):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_batch_end(outputs, batch, batch_idx, dataloader_idx)
-        
+
         def on_train_epoch_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_epoch_start()
-        
+
         def on_train_epoch_end(self, outputs):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_train_epoch_end(outputs)
-        
+
         def on_validation_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_start()
-        
+
         def on_validation_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_end()
-        
+
         def on_validation_batch_start(self, batch, batch_idx, dataloader_idx):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_batch_start(batch, batch_idx, dataloader_idx)
-        
+
         def on_validation_batch_end(self, outputs, batch, batch_idx, dataloader_idx):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_batch_end(outputs, batch, batch_idx, dataloader_idx)
-        
+
         def on_validation_epoch_start(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_epoch_start()
-        
+
         def on_validation_epoch_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_epoch_end()
@@ -259,19 +259,19 @@ def test_trainer_model_hook_system(tmpdir):
         def on_test_epoch_end(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_test_epoch_end()
-            
+
         def on_validation_model_eval(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_model_eval()
-            
+
         def on_validation_model_train(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_validation_model_train()
-            
+
         def on_test_model_eval(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_test_model_eval()
-            
+
         def on_test_model_train(self):
             self.called.append(inspect.currentframe().f_code.co_name)
             super().on_test_model_train()
