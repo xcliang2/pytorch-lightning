@@ -114,6 +114,12 @@ class DDPAccelerator(Accelerator):
         num_gpus = max(1, len(gpu_ids.split(',')))
 
         os.environ['WORLD_SIZE'] = f'{num_gpus * self.trainer.num_nodes}'
+        # todo
+        print('!?!?!?!?!\n' * 5)
+        print(os.environ['WORLD_SIZE'])
+        print(num_gpus)
+        print(self.trainer.num_nodes)
+        print('!?!?!?!?!\n' * 5)
 
         self.interactive_ddp_procs = []
         for local_rank in range(1, self.trainer.num_processes):
@@ -144,9 +150,8 @@ class DDPAccelerator(Accelerator):
         model = self.trainer.model
 
         results = self.ddp_train(process_idx=self.task_idx, model=model)
-        # TODO: try this skip
-        # if 'WORLD_SIZE' in os.environ:
-        #     del os.environ['WORLD_SIZE']
+        if 'WORLD_SIZE' in os.environ:
+            del os.environ['WORLD_SIZE']
         return results
 
     def training_step(self, args):
