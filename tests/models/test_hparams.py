@@ -18,6 +18,7 @@ from argparse import Namespace
 import cloudpickle
 import pytest
 import torch
+from fsspec.implementations.local import LocalFileSystem
 from omegaconf import OmegaConf, Container
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
@@ -25,7 +26,8 @@ from torch.utils.data import DataLoader
 from pytorch_lightning import Trainer, LightningModule
 from pytorch_lightning.core.saving import save_hparams_to_yaml, load_hparams_from_yaml
 from pytorch_lightning.utilities import AttributeDict, is_picklable
-from tests.base import EvalModelTemplate, TrialMNIST
+from tests.base import EvalModelTemplate, TrialMNIST, BoringModel
+from tests.base.datamodules import TrialMNISTDataModule
 
 
 class SaveHparamsModel(EvalModelTemplate):
@@ -554,3 +556,25 @@ def test_args(tmpdir):
     with pytest.raises(TypeError, match="__init__\(\) got an unexpected keyword argument 'test'"):
         SubClassVarArgs.load_from_checkpoint(raw_checkpoint_path)
 
+
+class UnsafeParamModel(BoringModel):
+
+    def __init__(self, my_path, any_param=123):
+        super().__init__()
+        self.save_hyperparameters()
+
+
+def test_model_with_fsspec_as_parameter(tmpdir):
+
+    dm = TrialMNISTDataModule(tmpdir)
+    model = UnsafeParamModel(LocalFileSystem(tmpdir))
+
+    trainer = Trainer(
+        default_root_dir=tmpdir,
+        limit_train_batches=2,
+        limit_val_batches=2,
+        limit_test_batches=2,
+        max_epochs=1,
+    )
+    trainer.fit(model)
+    trainer.test()
